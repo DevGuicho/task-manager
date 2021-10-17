@@ -1,0 +1,13 @@
+/* BASE */
+@import './base/reset.css';
+@import './base/fonts.css';
+
+/* COMPONENTS */
+@import './components/container.css';
+@import './components/AddTask.css';
+@import './components/buttons.css';
+@import './components/TaskItem.css';
+@import './components/EditTask.css';
+
+/* UTILITIES */
+@import './utils/variables.css';

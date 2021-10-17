@@ -1,0 +1,19 @@
+.btn-primary {
+  background-color: var(--purple-button);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 5px;
+  outline: none;
+  cursor: pointer;
+  border: 1px solid var(--purple-button);
+}
+
+.btn-link {
+  background-color: #1e2a3b;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 5px;
+  outline: none;
+  cursor: pointer;
+  border: 1px solid var(--purple-button);
+}
