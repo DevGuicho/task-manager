@@ -1,23 +1,13 @@
 import React from 'react'
 import TaskItem from './TaskItem'
 
-const TASK_LIST = [
-  {
-    id: '23r43q',
-    name: 'Walk the dog',
-    isCompleted: false,
-  },
-  {
-    id: 'fdasfdas',
-    name: 'Do homework',
-    isCompleted: true,
-  },
-]
+import { useSelector } from 'react-redux'
 
 const TasksList = () => {
+  const tasks = useSelector(({ tasks }) => tasks.taskList)
   return (
     <ol>
-      {TASK_LIST.map((task) => (
+      {tasks.map((task) => (
         <TaskItem key={task.id} {...task} />
       ))}
     </ol>
