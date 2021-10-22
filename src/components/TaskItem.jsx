@@ -15,7 +15,7 @@ const TaskItem = ({ name, isCompleted, id }) => {
     dispatch(deleteTask(id))
   }
   return (
-    <li className="taskItem__container">
+    <li className="taskItem__container animate__animated animate__fadeIn">
       <div className="taskItem__wrapper--name">
         <i>
           {isCompleted ? (

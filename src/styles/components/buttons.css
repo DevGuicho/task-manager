@@ -1,3 +1,22 @@
+.btn {
+  padding: 8px 16px;
+  border-radius: 5px;
+  border-width: 1px;
+  border-style: solid;
+  cursor: pointer;
+  outline: none;
+}
+
+.btn.btn-primary {
+  background-color: var(--purple-button);
+  border-color: var(--purple-button);
+  color: white;
+}
+
+.btn.w-full {
+  width: 100%;
+}
+
 .btn-primary {
   background-color: var(--purple-button);
   color: white;
@@ -16,4 +35,33 @@
   outline: none;
   cursor: pointer;
   border: 1px solid var(--purple-button);
+}
+
+.btn-google {
+  background: none;
+  color: var(--color-google);
+  padding: 8px 16px;
+  border-radius: 5px;
+  outline: none;
+  cursor: pointer;
+  border: 1px solid var(--color-google);
+  transition: all 0.3s ease;
+}
+.btn-google:hover {
+  color: white;
+  background-color: var(--color-google);
+}
+.btn-facebook {
+  background: none;
+  color: var(--color-facebook);
+  padding: 8px 16px;
+  border-radius: 5px;
+  outline: none;
+  cursor: pointer;
+  border: 1px solid var(--color-facebook);
+  transition: all 0.3s ease;
+}
+.btn-facebook:hover {
+  color: white;
+  background-color: var(--color-facebook);
 }

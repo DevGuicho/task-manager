@@ -1,0 +1,22 @@
+.input-control {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.input-control label {
+  margin-bottom: 8px;
+}
+.input-control__caption {
+  font: 14px/22px 'Inter', sans-serif;
+  color: var(--light-fonts);
+  margin-top: 8px;
+}
+
+.input-control__error {
+  position: absolute;
+  right: 0;
+  color: var(--color-danger);
+  font: 14px/22px 'Inter', sans-serif;
+}

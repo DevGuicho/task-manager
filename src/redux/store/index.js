@@ -1,7 +1,9 @@
 import { createStore, combineReducers } from 'redux'
 import taskReducer from '../reducers/task'
+import usersReducers from '../reducers/usersReducers'
 
 const reducers = combineReducers({
+  user: usersReducers,
   tasks: taskReducer,
 })
 const store = createStore(
