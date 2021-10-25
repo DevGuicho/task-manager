@@ -1,8 +1,11 @@
 import React from 'react'
+import toast from 'react-hot-toast'
 import { HiCheckCircle, HiPencilAlt, HiTrash, HiXCircle } from 'react-icons/hi'
 import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router'
-import { deleteTask, selectTask } from '../redux/actions/tasksActiosn'
+
+import { selectTask } from '../redux/actions/tasksActiosn'
+import DeleteToast from './DeleteToast'
 
 const TaskItem = ({ name, isCompleted, id }) => {
   const dispatch = useDispatch()
@@ -12,10 +15,10 @@ const TaskItem = ({ name, isCompleted, id }) => {
     history.push(`/edit/${id}`)
   }
   const handleDelete = () => {
-    dispatch(deleteTask(id))
+    toast((t) => <DeleteToast customToast={t} itemId={id} />)
   }
   return (
-    <li className="taskItem__container animate__animated animate__fadeIn">
+    <li className="taskItem__container">
       <div className="taskItem__wrapper--name">
         <i>
           {isCompleted ? (
