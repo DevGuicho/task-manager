@@ -17,8 +17,8 @@ const Register = () => {
   }
   const handleSubmit = (values) => {
     dispatch(registerRequest(values))
-    history.replace('/')
-    console.log(values)
+      .then(() => history.replace('/'))
+      .catch(() => {})
   }
   return (
     <>

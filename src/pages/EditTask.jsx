@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { Helmet } from 'react-helmet'
-import toast from 'react-hot-toast'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { Link, useParams, useHistory } from 'react-router-dom'
@@ -34,14 +33,14 @@ const EditTask = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    dispatch(updateTaskRequest(editedTask))
-    toast.success('Task updated')
-    history.push('/')
+    dispatch(updateTaskRequest(editedTask)).then(() => {
+      history.push('/')
+    })
   }
   return (
     <>
       <Helmet>
-        <title>Task Manager | Edit Task</title>
+        <title> Edit Task | Task Manager</title>
       </Helmet>
       <div className="container">
         <div className="editTask__container">

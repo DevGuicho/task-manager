@@ -25,7 +25,7 @@ export default function (state = initialState, action) {
     case ADD_TASK:
       return {
         ...state,
-        taskList: [...state.taskList, action.payload],
+        taskList: [action.payload, ...state.taskList],
       }
     case SELECT_TASK:
       return {
@@ -33,10 +33,6 @@ export default function (state = initialState, action) {
         selectedTask: state.taskList.find((task) => task.id === action.payload),
       }
     case UPDATE_TASK:
-      /* const indexOf = state.taskList.indexOf(
-        (task) => task.id === action.payload.id
-      )
-      state.taskList[indexOf] = action.payload */
       return {
         ...state,
         selectedTask: null,

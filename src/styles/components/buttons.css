@@ -30,6 +30,9 @@
 }
 
 .btn-primary {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: var(--purple-button);
   color: white;
   padding: 8px 16px;
@@ -76,4 +79,10 @@
 .btn-facebook:hover {
   color: white;
   background-color: var(--color-facebook);
+}
+
+.btn__loading {
+  margin: 0 auto;
+  width: 40px;
+  height: 40px;
 }

@@ -7,8 +7,11 @@ import { Link, useHistory } from 'react-router-dom'
 import { loginUser } from '../redux/actions/usersActions'
 import { SignInSchema } from '../utils/schemas/SignUpSchema'
 import SocialButtons from '../components/SocialButtons'
+import { Toaster } from 'react-hot-toast'
+import { useSelector } from 'react-redux'
 
 const Login = () => {
+  const { isLoading } = useSelector(({ user }) => user)
   const dispatch = useDispatch()
   const history = useHistory()
 
@@ -19,7 +22,8 @@ const Login = () => {
         password,
       })
     )
-    history.replace('/')
+      .then(() => history.replace('/'))
+      .catch(() => console.log(''))
   }
 
   return (
@@ -27,6 +31,7 @@ const Login = () => {
       <Helmet>
         <title>Login | Task Manager</title>
       </Helmet>
+      <Toaster />
       <div className="container">
         <div className="login__wrapper">
           <h1>Login</h1>
@@ -62,7 +67,11 @@ const Login = () => {
                 <Link to="/">Forgot password ?</Link>
               </div>
 
-              <button className="btn-primary btn-login" type="submit">
+              <button
+                className="btn-primary btn-login"
+                type="submit"
+                disabled={isLoading}
+              >
                 Login
               </button>
             </Form>
