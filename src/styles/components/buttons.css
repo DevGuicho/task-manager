@@ -13,6 +13,18 @@
   color: white;
 }
 
+.btn.btn-cancel {
+  border-color: var(--light-fonts);
+  background: none;
+  color: var(--light-fonts);
+}
+
+.btn.btn-delete {
+  background-color: #d83232;
+  border-color: #d83232;
+  color: white;
+}
+
 .btn.w-full {
   width: 100%;
 }
