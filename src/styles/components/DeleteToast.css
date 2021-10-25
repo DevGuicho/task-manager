@@ -1,0 +1,23 @@
+.toast {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.toast__buttons {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.toast__question {
+  text-align: center;
+  color: var(--body-fonts);
+}
+
+.toast__icon {
+  background-color: #d83232;
+  border-radius: 50%;
+  padding: 10px;
+}
