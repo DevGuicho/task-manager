@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { addTask } from '../redux/actions/tasksActiosn'
+import { addTaskRequest } from '../redux/actions/tasksActiosn'
 
 const AddTask = () => {
   const dispatch = useDispatch()
@@ -8,24 +8,28 @@ const AddTask = () => {
   const handleChange = (e) => {
     setTask(e.target.value)
   }
-  const handleClick = () => {
-    dispatch(addTask(task))
+  const handleClick = (e) => {
+    e.preventDefault()
+    if (task.length > 0) {
+      dispatch(addTaskRequest(task.trim()))
+      setTask('')
+    }
   }
   return (
     <div className="addTask__container">
       <h1>Task Manager</h1>
-      <div className="addTask__form">
+      <form className="addTask__form" onSubmit={handleClick}>
         <input
           type="text"
-          name="newTask"
-          id="newTask"
+          name="name"
+          id="name"
           placeholder="e. g. Wash dishes"
+          autoComplete="off"
           onChange={handleChange}
+          value={task}
         />
-        <button className="btn-primary" onClick={handleClick}>
-          Submit
-        </button>
-      </div>
+        <button className="btn-primary">Submit</button>
+      </form>
     </div>
   )
 }
