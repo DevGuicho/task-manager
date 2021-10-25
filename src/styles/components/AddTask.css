@@ -24,3 +24,14 @@
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
 }
+
+@media (max-width: 576px) {
+  .addTask__form {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .addTask__form button,
+  .addTask__form input {
+    border-radius: 5px;
+  }
+}
