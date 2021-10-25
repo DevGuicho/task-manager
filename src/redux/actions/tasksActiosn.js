@@ -1,3 +1,4 @@
+import toast from 'react-hot-toast'
 import apiRequest from '../../utils/axios/apiRequest'
 import {
   ADD_TASK,
@@ -54,51 +55,76 @@ export const tasksRequest = () => async (dispatch) => {
 }
 
 export const addTaskRequest = (task) => async (dispatch) => {
-  try {
-    const { data } = await apiRequest({
+  toast.promise(
+    apiRequest({
       method: 'POST',
       url: '/api/tasks',
       headers: {
         Authorization: 'Bearer ' + window.localStorage.getItem('token'),
       },
       data: { name: task },
-    })
-
-    dispatch(addTask(data.data))
-  } catch (error) {
-    dispatch(setError(error.response.data.message))
-  }
+    }),
+    {
+      success: ({ data }) => {
+        dispatch(addTask(data.data))
+        return <b>Task added</b>
+      },
+      loading: <b>Saving Task...</b>,
+      error: (error) => {
+        dispatch(setError(error.response.data.message))
+        return <b>{error.response.data.message}</b>
+      },
+    }
+  )
 }
 
 export const updateTaskRequest = (task) => async (dispatch) => {
   const { id, ...restTask } = task
-  try {
-    const { data } = await apiRequest({
+
+  await toast.promise(
+    apiRequest({
       method: 'PUT',
       url: `/api/tasks/${task.id}`,
       data: restTask,
       headers: {
         Authorization: 'Bearer ' + window.localStorage.getItem('token'),
       },
-    })
-    const taskUpdated = data.data
-    dispatch(updateTask(taskUpdated))
-  } catch (error) {
-    dispatch(setError(error.response.data.message))
-  }
+    }),
+    {
+      success: ({ data }) => {
+        const taskUpdated = data.data
+        dispatch(updateTask(taskUpdated))
+        return <b>Task updated</b>
+      },
+      loading: <b>Updating task...</b>,
+      error: (error) => {
+        dispatch(setError(error.response.data.message))
+        return <b>{error.response.data.message}</b>
+      },
+    }
+  )
 }
 
-export const deleteTaskRequest = (id) => async (dispatch) => {
-  try {
-    await apiRequest({
+export const deleteTaskRequest = (id, toastId) => async (dispatch) => {
+  toast.promise(
+    apiRequest({
       method: 'DELETE',
       url: `/api/tasks/${id}`,
       headers: {
         Authorization: 'Bearer ' + window.localStorage.getItem('token'),
       },
-    })
-    dispatch(deleteTask(id))
-  } catch (error) {
-    dispatch(setError(error.response.data.message))
-  }
+    }),
+    {
+      success: () => {
+        dispatch(deleteTask(id))
+        return <b>Task deleted</b>
+      },
+      loading: <b>Deleting task...</b>,
+      error: (error) => {
+        dispatch(setError(error.response.data.message))
+        return <b>{error.response.data.message}</b>
+      },
+    },
+    { id: toastId }
+  )
 }

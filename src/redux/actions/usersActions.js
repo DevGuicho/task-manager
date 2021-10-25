@@ -1,3 +1,4 @@
+import toast from 'react-hot-toast'
 import apiRequest from '../../utils/axios/apiRequest'
 import {
   LOGIN,
@@ -55,8 +56,8 @@ export const authUser = () => async (dispatch) => {
 export const registerRequest = (user) => async (dispatch) => {
   const { name, email, password } = user
 
-  try {
-    const { data } = await apiRequest({
+  await toast.promise(
+    apiRequest({
       method: 'POST',
       url: '/api/auth/sign-up',
       data: {
@@ -64,36 +65,51 @@ export const registerRequest = (user) => async (dispatch) => {
         email,
         password,
       },
-    })
-    const { user, token } = data.data
-    console.log({ user, token })
+    }),
+    {
+      success: ({ data }) => {
+        const { user, token } = data.data
 
-    window.localStorage.setItem('token', token)
-    dispatch(register(user))
-  } catch (error) {
-    console.log('hola')
-    console.log(error)
-  }
+        window.localStorage.setItem('token', token)
+        dispatch(register(user))
+        return <b>Register successful</b>
+      },
+      loading: <b>Loading...</b>,
+      error: (error) => {
+        dispatch(setError(error.response.data.message))
+        return <b>{error.response.data.message}</b>
+      },
+    }
+  )
 }
 
 export const loginUser =
   ({ email, password }) =>
   async (dispatch) => {
-    try {
-      const { data } = await apiRequest({
-        method: 'POST',
+    dispatch(setIsloading())
+    await toast.promise(
+      apiRequest({
+        method: 'GET',
         url: '/api/auth/sign-in',
-        data: {
-          email,
+        auth: {
+          username: email,
           password,
         },
-      })
-      const { user, token } = data.data
-      window.localStorage.setItem('token', token)
-      dispatch(login(user))
-    } catch (error) {
-      dispatch(setError(error.response.data.message))
-    }
+      }),
+      {
+        success: ({ data }) => {
+          const { user, token } = data.data
+          window.localStorage.setItem('token', token)
+          dispatch(login(user))
+          return <b>Login successful</b>
+        },
+        loading: <b>Loading...</b>,
+        error: (error) => {
+          dispatch(setError(error.response.data.message))
+          return <b>{error.response.data.message}</b>
+        },
+      }
+    )
   }
 
 export const logoutUser = () => (dispatch) => {

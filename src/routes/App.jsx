@@ -1,4 +1,5 @@
 import React, { Suspense, useEffect, useState } from 'react'
+import { Toaster } from 'react-hot-toast'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import { BrowserRouter, Switch } from 'react-router-dom'
@@ -31,16 +32,19 @@ const App = () => {
   }
 
   return (
-    <BrowserRouter>
-      <Suspense fallback={<Loading />}>
-        <Switch>
-          <PrivateRoute exact path="/" component={Home} />
-          <PrivateRoute exact path="/edit/:id" component={EditTask} />
-          <PublicRoute exact path="/auth/login" component={Login} />
-          <PublicRoute exact path="/auth/sign-up" component={Register} />
-        </Switch>
-      </Suspense>
-    </BrowserRouter>
+    <>
+      <Toaster toastOptions={{ duration: 4000 }} />
+      <BrowserRouter>
+        <Suspense fallback={<Loading />}>
+          <Switch>
+            <PrivateRoute exact path="/" component={Home} />
+            <PrivateRoute exact path="/edit/:id" component={EditTask} />
+            <PublicRoute exact path="/auth/login" component={Login} />
+            <PublicRoute exact path="/auth/sign-up" component={Register} />
+          </Switch>
+        </Suspense>
+      </BrowserRouter>
+    </>
   )
 }
 

@@ -27,6 +27,7 @@ export default (state = initialState, action) => {
     case SET_LOGIN_ERROR:
       return {
         ...state,
+        isLoading: false,
         error: action.payload,
       }
     case SET_LOADING:
