@@ -8,6 +8,8 @@
 @import './components/TaskItem.css';
 @import './components/EditTask.css';
 @import './components/User.css';
+@import './components/DeleteToast.css';
+@import './components/Spinner.css';
 
 /* LAYOUT */
 @import './layout/input.css';
@@ -15,6 +17,8 @@
 
 /* PAGES */
 @import './pages/Login.css';
+@import './pages/Loading.css';
 
 /* UTILITIES */
 @import './utils/variables.css';
+@import './utils/animation.css';
