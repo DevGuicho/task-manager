@@ -14,7 +14,7 @@ const TasksList = () => {
     if (tasks.length === 0) {
       dispatch(tasksRequest())
     }
-  }, [tasks, dispatch])
+  }, [dispatch, tasks.length])
   return (
     <TransitionGroup component="ol">
       {tasks.map((task) => (
