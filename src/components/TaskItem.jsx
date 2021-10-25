@@ -15,7 +15,7 @@ const TaskItem = ({ name, isCompleted, id }) => {
     history.push(`/edit/${id}`)
   }
   const handleDelete = () => {
-    toast((t) => <DeleteToast customToast={t} itemId={id} />)
+    toast((t) => <DeleteToast toastId={t.id} itemId={id} />)
   }
   return (
     <li className="taskItem__container">
