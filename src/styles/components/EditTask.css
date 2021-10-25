@@ -76,3 +76,10 @@ input[type='checkbox']:not(:checked) ~ div::before {
   display: flex;
   justify-content: center;
 }
+
+@media (max-width: 576px) {
+  .editTask__form--control {
+    flex-direction: column;
+    gap: 8px;
+  }
+}
