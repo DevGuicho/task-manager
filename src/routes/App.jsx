@@ -1,22 +1,45 @@
-import React from 'react'
+import React, { Suspense, useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { BrowserRouter, Switch } from 'react-router-dom'
 
 import PrivateRoute from '../hoc/PrivateRoute'
 import PublicRoute from '../hoc/PublicRoute'
-import EditTask from '../pages/EditTask'
-import Home from '../pages/Home'
-import Login from '../pages/Login'
-import Register from '../pages/Register'
+import Loading from '../pages/Loading'
+import { authUser } from '../redux/actions/usersActions'
+
+const Home = React.lazy(() => import('../pages/Home'))
+const EditTask = React.lazy(() => import('../pages/EditTask'))
+const Login = React.lazy(() => import('../pages/Login'))
+const Register = React.lazy(() => import('../pages/Register'))
 
 const App = () => {
+  const { user } = useSelector(({ user }) => user)
+  const [isChecking, setIschecking] = useState(true)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    if (!user && window.localStorage.getItem('token')) {
+      dispatch(authUser()).then(() => setIschecking(false))
+    } else {
+      setIschecking(false)
+    }
+  }, [user, dispatch])
+
+  if (isChecking) {
+    return <Loading />
+  }
+
   return (
     <BrowserRouter>
-      <Switch>
-        <PrivateRoute exact path="/" component={Home} />
-        <PrivateRoute exact path="/edit/:id" component={EditTask} />
-        <PublicRoute exact path="/auth/login" component={Login} />
-        <PublicRoute exact path="/auth/sign-up" component={Register} />
-      </Switch>
+      <Suspense fallback={<Loading />}>
+        <Switch>
+          <PrivateRoute exact path="/" component={Home} />
+          <PrivateRoute exact path="/edit/:id" component={EditTask} />
+          <PublicRoute exact path="/auth/login" component={Login} />
+          <PublicRoute exact path="/auth/sign-up" component={Register} />
+        </Switch>
+      </Suspense>
     </BrowserRouter>
   )
 }
